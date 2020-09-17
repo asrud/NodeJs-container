@@ -58,7 +58,7 @@ pipeline {
                 azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID, publishType: 'docker',
                    resourceGroup: env.RES_GROUP, appName: env.WEB_APP,
                    dockerImageName: 'asrud/sg', dockerImageTag: 'latest',
-                   dockerRegistryEndpoint: [url: " https://registry.hub.docker.com/v1/repositories/"]
+                   dockerRegistryEndpoint: [credentialsId: 'DockerHub', url: 'https://registry.hub.docker.com/v1/repositories/']
             } 
         }
 
