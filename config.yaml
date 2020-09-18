@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: sg
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: sg
+  template:
+    metadata:
+      labels:
+        app: sg
+    spec:
+      containers:
+      - name: sg
+        image: asrud/sg:latest
+        ports:
+        - containerPort: 80
+        env:
+        - name: TTITLE
+          value: "Test"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: sg-svc
+  namespace: default
+spec:
+  type: ClusterIP
+  ports:
+  - port: 8000
+  selector:
+    app: sg
+ 
