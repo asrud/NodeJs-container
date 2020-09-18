@@ -18,8 +18,8 @@ pipeline {
             steps {   
                 script {      
                     try {
-                        sh 'echo stub'
-                        // sh '/usr/local/bin/shiftleft sourceguard -src .'
+                        //sh 'echo stub'
+                        sh '/usr/local/bin/shiftleft sourceguard -src .'
                     } catch (Exception e) {
                         echo "Code Analysis is BLOCK and recommend not using the source code"  
                     }
@@ -38,8 +38,8 @@ pipeline {
             steps {   
                 script {      
                     try {
-                        sh 'echo stub'
-                        // sh './sourceguard-cli -img sg.tar'
+                        //sh 'echo stub'
+                        sh '/usr/local/bin/shiftleft image-scan -img sg.tar'
                     } catch (Exception e) {
                         echo "Image Analysis is BLOCK and recommend not using the source code"  
                     }
