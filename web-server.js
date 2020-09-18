@@ -1,12 +1,12 @@
 const http = require('http');
 
 const hostname = '0.0.0.0';
-const port = 8000;
+const port = 80;
 
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end('HELLO to DevSecOps!  / '+ new Date().toString() +'\n');
+  res.end(new Date().toString() + ' : HELLO to DevSecOps!  / 01\n');
 });
 
 server.listen(port, hostname, () => {

@@ -55,10 +55,13 @@ pipeline {
 
         stage('Deploy to Azure Web App') {
             steps {
-                azureWebAppPublish azureCredentialsId: env.AZURE_CRED_ID, publishType: 'docker',
-                   resourceGroup: env.RES_GROUP, appName: env.WEB_APP,
-                   dockerImageName: 'asrud/sg', dockerImageTag: 'latest',
-                   dockerRegistryEndpoint: [credentialsId: 'DockerHub', url: 'https://registry.hub.docker.com/v1/repositories/']
+                azureWebAppPublish 
+                    appName: 'nojes-cont', 
+                    azureCredentialsId: 'azure-cli-2020-09-17-15-02-29', 
+                    dockerImageName: 'asrud/sg', 
+                    dockerImageTag: 'latest', 
+                    publishType: 'docker',
+                    resourceGroup: 'rgFunc'
             } 
         }
 
