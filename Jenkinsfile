@@ -58,8 +58,7 @@ pipeline {
                 azureWebAppPublish azureCredentialsId: 'azure-cli-2020-09-17-15-02-29', publishType: 'docker',
                    resourceGroup: 'rgFunc', 
                    appName: 'nojes-cont',
-                   dockerImageName: 'asrud/sg', dockerImageTag: 'latest',
-                   dockerRegistryEndpoint: [credentialsId: '', url: '']
+                   dockerImageName: 'asrud/sg', dockerImageTag: 'latest'
             } 
         }
 
