@@ -55,7 +55,7 @@ pipeline {
 
         stage('Deploy to AKS') {
             steps {
-                        sh 'kubectl apply -f config.yaml'
+                        sh 'kubectl replace --force -f config.yaml'
             } 
         }
 
