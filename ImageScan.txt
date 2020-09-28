@@ -1,0 +1,160 @@
+jenkins@vmJump:~/workspace/NodeJS-container$ /usr/local/bin/shiftleft image-scan -t 1200 -img sg.tar
+INFO   [18-09-2020 17:15:37.133] SourceGuard Scan Started!
+INFO   [18-09-2020 17:15:41.851] Project name: sg path: /tmp/sourceGuard844414035
+INFO   [18-09-2020 17:15:41.851] Scan ID: e34f3ee224d618e15fc8995521f7631b5fd1d0c27ba9ba9978c9e25b73e018b9-s3tE2g
+Action: BLOCK
+Packages Findings:
+        - Package Path: /usr/local/lib/node_modules/npm/node_modules/psl/yarn.lock
+          Package Manager: yarn
+          Severity: CRITICAL
+                - lodash  4.17.10
+                  Severity: CRITICAL
+                  Line: 2654
+                  CVEs Findings:
+                        - ID: CVE-2019-10744
+                        Description: Versions of lodash lower than 4.17.12 are vulnerable to Prototype Pollution. The function defaultsDeep could be tricked into adding or modifying properties of Object.prototype using a constructor payload.
+                        Severity: CRITICAL
+                        Last Modified: 2019-10-04T09:15:00Z
+                        - ID: CVE-2020-8203
+                        Description: Prototype pollution attack when using _.zipObjectDeep in lodash <= 4.17.15.
+                        Severity: HIGH
+                        Last Modified: 2020-08-17T16:49:00Z
+                        - ID: CVE-2018-16487
+                        Description: A prototype pollution vulnerability was found in lodash <4.17.11 where the functions merge, mergeWith, and defaultsDeep can be tricked into adding or modifying properties of Object.prototype.
+                        Severity: MEDIUM
+                        Last Modified: 2020-07-17T17:38:00Z
+                        - ID: CVE-2019-1010266
+                        Description: lodash prior to 4.17.11 is affected by: CWE-400: Uncontrolled Resource Consumption. The impact is: Denial of service. The component is: Date handler. The attack vector is: Attacker provides very long strings, which the library attempts to match using a regular expression. The fixed version is: 4.17.11.
+                        Severity: MEDIUM
+                        Last Modified: 2019-09-19T17:15:00Z
+                - axios  0.15.3
+                  Severity: HIGH
+                  Line: 293
+                  CVEs Findings:
+                        - ID: CVE-2019-10742
+                        Description: Axios up to and including 0.18.0 allows attackers to cause a denial of service (application crash) by continuing to accepting content after maxContentLength is exceeded.
+                        Severity: HIGH
+                        Last Modified: 2019-05-08T16:04:00Z
+                - ftp  0.3.10
+                  Severity: UNKNOWN
+                  Line: 1728
+                  CVEs Findings:
+                        - ID: CVE-1999-0201
+                        Description: A quote cwd command on FTP servers can reveal the full path of the home directory of the "ftp" user.
+                        Severity: UNKNOWN
+                        Last Modified: 2008-09-09T12:34:00Z
+                        - ID: CVE-1999-0082
+                        Description: CWD ~root command in ftpd allows root access.
+                        Severity: UNKNOWN
+                        Last Modified: 2008-09-09T12:33:00Z
+                - class-utils  0.3.6
+                  Severity: UNKNOWN
+                  Line: 788
+                  CVEs Findings:
+                        - ID: CVE-2008-5856
+                        Description: Directory traversal vulnerability in scripts/export.php in ClaSS before 0.8.61 allows remote attackers to read arbitrary files via directory traversal sequences in the ftype parameter.
+                        Severity: UNKNOWN
+                        Last Modified: 2017-09-29T01:32:00Z
+        - Package Path: /usr/local/lib/node_modules/npm/node_modules/libnpm/package.json
+          Package Manager: npm
+          Severity: CRITICAL
+                - bin-links ^ 1.1.2
+                  Severity: CRITICAL
+                  Line: 35
+                  CVEs Findings:
+                        - ID: CWE-434
+                        Description: The software allows the attacker to upload or transfer files of dangerous types that can be automatically processed within the product's environment.
+                        Severity: CRITICAL
+                        Last Modified: 0001-01-01T00:00:00Z
+                        - ID: CWE-119
+                        Description: The software performs operations on a memory buffer, but it can read from or write to a memory location that is outside of the intended boundary of the buffer.
+                        Severity: HIGH
+                        Last Modified: 0001-01-01T00:00:00Z
+                        - ID: CWE-61
+                        Description: The software, when opening a file or directory, does not sufficiently account for when the file is a symbolic link that resolves to a target outside of the intended control sphere. This could allow an attacker to cause the software to operate on unauthorized files.
+                        Severity: HIGH
+                        Last Modified: 0001-01-01T00:00:00Z
+                - npm-registry-fetch ^ 4.0.0
+                  Severity: MEDIUM
+                  Line: 50
+                  CVEs Findings:
+                        - ID: CWE-200
+                        Description: An information exposure is the intentional or unintentional disclosure of information to an actor that is not explicitly authorized to have access to that information.
+                        Severity: MEDIUM
+                        Last Modified: 0001-01-01T00:00:00Z
+        - Package Path: /usr/local/lib/node_modules/npm/node_modules/npm-normalize-package-bin/package-lock.json
+          Package Manager: npm
+          Severity: HIGH
+        - Package Path: /lib/apk/db/installed
+          Package Manager: apk
+          Severity: HIGH
+                - libcrypto1.1  1.1.1g-r0
+                  Severity: HIGH
+                  Line: 299
+                  CVEs Findings:
+                        - ID: CVE-2017-3204
+                        Description: The Go SSH library (x/crypto/ssh) by default does not verify host keys, facilitating man-in-the-middle attacks. Default behavior changed in commit e4e2799 to require explicitly registering a hostkey verification mechanism.
+                        Severity: HIGH
+                        Last Modified: 2020-07-07T18:21:00Z
+                        - ID: CVE-2019-11840
+                        Description: An issue was discovered in supplementary Go cryptography libraries, aka golang-googlecode-go-crypto, before 2019-03-20. A flaw was found in the amd64 implementation of golang.org/x/crypto/salsa20 and golang.org/x/crypto/salsa20/salsa. If more than 256 GiB of keystream is generated, or if the counter otherwise grows greater than 32 bits, the amd64 implementation will first generate incorrect output, and then cycle back to previously generated keystream. Repeated keystream bytes can lead to loss of confidentiality in encryption applications, or to predictability in CSPRNG applications.
+                        Severity: MEDIUM
+                        Last Modified: 2019-06-30T21:15:00Z
+                        - ID: CVE-2011-0766
+                        Description: The random number generator in the Crypto application before 2.0.2.2, and SSH before 2.0.5, as used in the Erlang/OTP ssh library before R14B03, uses predictable seeds based on the current time, which makes it easier for remote attackers to guess DSA host and SSH session keys.
+                        Severity: UNKNOWN
+                        Last Modified: 2011-07-13T04:00:00Z
+                - busybox  1.31.1-r9
+                  Severity: HIGH
+                  Line: 24
+                  CVEs Findings:
+                        - ID: CVE-2018-1000500
+                        Description: Busybox contains a Missing SSL certificate validation vulnerability in The "busybox wget" applet that can result in arbitrary code execution. This attack appear to be exploitable via Simply download any file over HTTPS using "busybox wget https://compromised-domain.com/important-file".
+                        Severity: HIGH
+                        Last Modified: 2020-08-04T17:58:00Z
+                - libgcc  9.3.0-r0
+                  Severity: HIGH
+                  Line: 572
+                  CVEs Findings:
+                        - ID: CVE-2019-15847
+                        Description: The POWER9 backend in GNU Compiler Collection (GCC) before version 10 could optimize multiple calls of the __builtin_darn intrinsic into a single call, thus reducing the entropy of the random number generator. This occurred because a volatile operation was not specified. For example, within a single execution of a program, the output of every __builtin_darn() call may be the same.
+                        Severity: HIGH
+                        Last Modified: 0001-01-01T00:00:00Z
+        - Package Path: /usr/local/lib/node_modules/npm/node_modules/configstore/package.json
+          Package Manager: npm
+          Severity: HIGH
+                - dot-prop ^ 4.1.0
+                  Severity: HIGH
+                  Line: 35
+                  CVEs Findings:
+                        - ID: CVE-2020-8116
+                        Description: Prototype pollution vulnerability in dot-prop npm package versions before 4.2.1 and versions 5.x before 5.1.1 allows an attacker to add arbitrary properties to JavaScript language constructs such as objects.
+                        Severity: HIGH
+                        Last Modified: 2020-09-10T15:16:00Z
+        - Package Path: /usr/local/lib/node_modules/npm/node_modules/yargs/package.json
+          Package Manager: npm
+          Severity: HIGH
+                - yargs-parser ^ 9.0.2
+                  Severity: HIGH
+                  Line: 41
+                  CVEs Findings:
+                        - ID: CWE-400
+                        Description: The software does not properly restrict the size or amount of resources that are requested or influenced by an actor, which can be used to consume more resources than intended.
+                        Severity: HIGH
+                        Last Modified: 0001-01-01T00:00:00Z
+                        - ID: CVE-2020-7608
+                        Description: yargs-parser could be tricked into adding or modifying properties of Object.prototype using a "__proto__" payload.
+                        Severity: MEDIUM
+                        Last Modified: 2020-06-05T15:23:00Z
+        - Package Path: /usr/local/lib/node_modules/npm/package.json
+          Package Manager: npm
+          Severity: UNKNOWN
+                - editor ~ 1.0.0
+                  Severity: UNKNOWN
+                  Line: 174
+                  CVEs Findings:
+                        - ID: CVE-2015-0903
+                        Description: Buffer overflow in Saitoh Kikaku Maruo Editor 8.51 and earlier allows remote attackers to execute arbitrary code via a crafted .hmbook file.
+                        Severity: UNKNOWN
+                        Last Modified: 2015-04-06T16:57:00Z
+Please see full analysis: https://portal.checkpoint.com/Dashboard/SourceGuard#/scan/image/e34f3ee224d618e15fc8995521f7631b5fd1d0c27ba9ba9978c9e25b73e018b9-s3tE2g

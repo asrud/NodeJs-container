@@ -30,7 +30,7 @@ pipeline {
         stage('Docker image Build and scan prep') {
             steps {
                 sh 'docker build -t asrud/sg .'
-                sh 'docker save asrud/sg -o sg.tar'
+                sh 'docker save asrud/sg:latest -o sg.tar'
             } 
         }
 
@@ -39,7 +39,7 @@ pipeline {
                 script {      
                     try {
                         //sh 'echo stub'
-                        sh '/usr/local/bin/shiftleft image-scan -img sg.tar'
+                        sh '/usr/local/bin/shiftleft image-scan -t 1200 -img sg.tar'
                     } catch (Exception e) {
                         echo "Image Analysis is BLOCK and recommend not using the source code"  
                     }
@@ -55,7 +55,7 @@ pipeline {
 
         stage('Deploy to AKS') {
             steps {
-                        sh 'kubectl replace --force -f config.yaml'
+                sh 'kubectl replace --force -f config.yaml'
             } 
         }
 
