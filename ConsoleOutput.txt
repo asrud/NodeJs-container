@@ -1,0 +1,142 @@
+Started by GitHub push by asrud
+Obtained Jenkinsfile from git https://github.com/asrud/NodeJs-container.git
+Running in Durability level: MAX_SURVIVABILITY
+[Pipeline] Start of Pipeline
+[Pipeline] node
+Running on Jenkins in /var/lib/jenkins/workspace/NodeJS-container
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Declarative: Checkout SCM)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential Asrud-token
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/asrud/NodeJs-container.git # timeout=10
+Fetching upstream changes from https://github.com/asrud/NodeJs-container.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.25.1'
+using GIT_ASKPASS to set credentials Asrud token as a password
+ > git fetch --tags --force --progress -- https://github.com/asrud/NodeJs-container.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision c8bf522d2da466b964e4fea06fc2013603497db6 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f c8bf522d2da466b964e4fea06fc2013603497db6 # timeout=10
+Commit message: "06"
+ > git rev-list --no-walk 49bed08c44923e7fae75a2a5b0b30390fc8636f5 # timeout=10
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] withEnv
+[Pipeline] {
+[Pipeline] withCredentials
+Masking supported pattern matches of $SG_SECRET_KEY or $CHKP_CLOUDGUARD_SECRET or $SG_CLIENT_ID or $CHKP_CLOUDGUARD_ID
+[Pipeline] {
+[Pipeline] stage
+[Pipeline] { (Clone Github repository)
+[Pipeline] checkout
+Selected Git installation does not exist. Using Default
+The recommended git tool is: NONE
+using credential Asrud-token
+ > git rev-parse --is-inside-work-tree # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/asrud/NodeJs-container.git # timeout=10
+Fetching upstream changes from https://github.com/asrud/NodeJs-container.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.25.1'
+using GIT_ASKPASS to set credentials Asrud token as a password
+ > git fetch --tags --force --progress -- https://github.com/asrud/NodeJs-container.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/master^{commit} # timeout=10
+ > git rev-parse refs/remotes/origin/origin/master^{commit} # timeout=10
+Checking out Revision c8bf522d2da466b964e4fea06fc2013603497db6 (refs/remotes/origin/master)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f c8bf522d2da466b964e4fea06fc2013603497db6 # timeout=10
+Commit message: "06"
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (SourceGuard Code Scan)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ /usr/local/bin/shiftleft sourceguard -src .
+[31mFATAL  [0m[28-09-2020 08:59:55.449] rename /usr/local/bin/shiftleft /tmp/ShiftLeft-prod/shiftleft-backup: permission denied. 
+[Pipeline] echo
+Code Analysis is BLOCK and recommend not using the source code
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker image Build and scan prep)
+[Pipeline] sh
++ docker build -t asrud/sg .
+Sending build context to Docker daemon  93.93MB
+
+Step 1/4 : FROM node:lts-alpine
+ ---> 1f52b7199ba6
+Step 2/4 : MAINTAINER AntonR
+ ---> Using cache
+ ---> 421aa218ce5d
+Step 3/4 : ADD web-server.js /web-server.js
+ ---> e416a331f91d
+Step 4/4 : ENTRYPOINT ["node", "web-server.js"]
+ ---> Running in e9157ed0108e
+Removing intermediate container e9157ed0108e
+ ---> cfedf4ca79a4
+Successfully built cfedf4ca79a4
+Successfully tagged asrud/sg:latest
+[Pipeline] sh
++ docker save asrud/sg:latest -o sg.tar
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (SourceGuard Image Scan)
+[Pipeline] script
+[Pipeline] {
+[Pipeline] sh
++ /usr/local/bin/shiftleft image-scan -t 1200 -img sg.tar
+[31mFATAL  [0m[28-09-2020 09:00:32.327] rename /usr/local/bin/shiftleft /tmp/ShiftLeft-prod/shiftleft-backup: permission denied. 
+[Pipeline] echo
+Image Analysis is BLOCK and recommend not using the source code
+[Pipeline] }
+[Pipeline] // script
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Docker image upload)
+[Pipeline] sh
++ docker push asrud/sg:latest
+The push refers to repository [docker.io/asrud/sg]
+0ffc0ee1f448: Preparing
+c7995e2f86d5: Preparing
+08105e0ab769: Preparing
+fc5ad04c3ef7: Preparing
+3e207b409db3: Preparing
+08105e0ab769: Layer already exists
+fc5ad04c3ef7: Layer already exists
+c7995e2f86d5: Layer already exists
+3e207b409db3: Layer already exists
+0ffc0ee1f448: Pushed
+latest: digest: sha256:8283cb0a76efe0864e85c19a899c79593def4dd90ba637aebbac1d920b8da595 size: 1365
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] stage
+[Pipeline] { (Deploy to AKS)
+[Pipeline] sh
++ kubectl replace --force -f config.yaml
+deployment.apps "sg" deleted
+service "sg-svc" deleted
+deployment.apps/sg replaced
+service/sg-svc replaced
+[Pipeline] }
+[Pipeline] // stage
+[Pipeline] }
+[Pipeline] // withCredentials
+[Pipeline] }
+[Pipeline] // withEnv
+[Pipeline] }
+[Pipeline] // node
+[Pipeline] End of Pipeline
+Finished: SUCCESS

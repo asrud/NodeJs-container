@@ -6,7 +6,7 @@ const port = 80;
 const server = http.createServer((req, res) => {
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain');
-  res.end(new Date().toString() + ' : HELLO to DevSecOps!  / 06\n');
+  res.end(new Date().toString() + ' : HELLO to DevSecOps!  / 07\n');
 });
 
 server.listen(port, hostname, () => {

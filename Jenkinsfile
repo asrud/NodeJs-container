@@ -19,7 +19,8 @@ pipeline {
                 script {      
                     try {
                         //sh 'echo stub'
-                        sh '/usr/local/bin/shiftleft sourceguard -src .'
+                        sh 'cp /usr/local/bin/shiftleft .'
+                        sh './shiftleft sourceguard -src .'
                     } catch (Exception e) {
                         echo "Code Analysis is BLOCK and recommend not using the source code"  
                     }
@@ -39,7 +40,8 @@ pipeline {
                 script {      
                     try {
                         //sh 'echo stub'
-                        sh '/usr/local/bin/shiftleft image-scan -t 1200 -img sg.tar'
+                        sh 'cp /usr/local/bin/shiftleft .'
+                        sh './shiftleft image-scan -t 1200 -img sg.tar'
                     } catch (Exception e) {
                         echo "Image Analysis is BLOCK and recommend not using the source code"  
                     }
